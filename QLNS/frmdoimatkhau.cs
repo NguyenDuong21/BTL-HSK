@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Data.SqlClient;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -24,7 +25,6 @@ namespace QLNS
 
         private void button1_Click(object sender, EventArgs e)
         {
-            string update="update tbuser set Pass='"+textBox3.Text+"' where(Username=N'"+textBox1.Text+"' and Pass='"+textBox2.Text+"')";
             string ten = textBox1.Text;
             if (ten == "")
             {
@@ -52,9 +52,43 @@ namespace QLNS
                         {
                             if (textBox3.Text == textBox4.Text)
                             {
-                                cls.thucthiketnoi(update);
-                                MessageBox.Show("Bạn đã thay đổi mật khẩu thành công");
-                                this.Close();
+
+                                using (SqlConnection connection = new SqlConnection(Clsdatabase.connectionString))
+                                {
+                                    string procname = "sp_dangnhap";
+                                    connection.Open();
+                                    using (SqlCommand command = new SqlCommand(procname, connection))
+                                    {
+                                        command.CommandType = CommandType.StoredProcedure;
+                                        command.Parameters.AddWithValue("sTendangnhap", textBox1.Text);
+                                        command.Parameters.AddWithValue("sMatkhau", textBox2.Text);
+
+                                        SqlDataReader reader = command.ExecuteReader();
+                                        if(reader.Read())
+                                        {
+                                            reader.Close();
+                                            string prochangepass = "sp_doimatkhau";
+                                            using (SqlCommand commandchangepass = new SqlCommand(prochangepass, connection))
+                                            {
+                                                commandchangepass.CommandType = CommandType.StoredProcedure;
+                                                commandchangepass.Parameters.AddWithValue("sTendangnhap", textBox1.Text);
+                                                commandchangepass.Parameters.AddWithValue("sMatkhaumoi", textBox3.Text);
+                                                int row_aff = commandchangepass.ExecuteNonQuery();
+                                                if(row_aff > 0)
+                                                {
+                                                    MessageBox.Show("Thay đổi mật khẩu thành công");
+                                                } else
+                                                {
+                                                    MessageBox.Show("Thay đổi mật khẩu thất bại");
+                                                } 
+                                            }
+                                        } else
+                                        {
+                                            MessageBox.Show("Tài khoản hoặc mật khẩu không chính xác");
+                                        }    
+                                    }
+                                    connection.Close();
+                                }    
                             }
                             else
                             {

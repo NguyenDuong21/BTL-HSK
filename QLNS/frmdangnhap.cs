@@ -13,8 +13,8 @@ namespace QLNS
 {
     public partial class frmdangnhap : Form
     {
-        Clsdatabase cls = new Clsdatabase();
         private SqlConnection Con = null;
+
         public frmdangnhap()
         {
             InitializeComponent();
@@ -22,69 +22,34 @@ namespace QLNS
 
         private void button1_Click(object sender, EventArgs e)
         {
-        //    ////MessageBox.Show( cls.thu(textBox2.Text, "select pass from tbuser").ToString());
-        //    if ((cls.kt(textBox1.Text, "select * from tbuser", 0) == true) && (cls.kt(textBox2.Text, "select * from tbuser", 1) == true))
-        //    {
-        //        //string sql = "select Quyen from tbuser ";
-        //        //if (cls.kt("Admin", "select * from tbuser", 2) == true)
-        //        //{
-
-        //            this.Hide();
-        //            //Global.frmmain.k = 4;
-        //            //Global.frmmain.Refresh();
-        //            //Global.frmmain.truyen();
-
-        //            //Global.frmmain.ShowDialog();
-        //            MessageBox.Show("Bạn đã đăng nhập thành công");
-        //            FrmMain.quyen = "Admin";
-
-        //            this.Hide();
-        //            FrmMain fm = new FrmMain();
-        //            //fm.k = 4;
-        //            fm.truyen();
-        //            MessageBox.Show("Bạn đã đăng nhập thành công quyen admin");
-        //            fm.ShowDialog();
-        //            this.Close();
-        //        }
-                //else //if (sql == "Client")
-                //{
-                // t thuwr roi k dc
-                //FrmMain.quyen = "Member";
-                //this.Hide();
-                //FrmMain fm = new FrmMain();
-                ////fm.k = 5;
-                //fm.truyen();
-                //MessageBox.Show("Bạn đã đăng nhập thành công quyền user");
-                //fm.ShowDialog();
-                //sửa đi
-            Con = new SqlConnection();
-            Con.ConnectionString = @"Data Source=DESKTOP-LNGJ4BJ;Initial Catalog=QLNS;Integrated Security=True";
-            Con.Open();
-            string select = "Select * From tbuser where Username='" + textBox1.Text + "' and Pass='" + textBox2.Text + "' and Quyen='Admin'";
-            SqlCommand cmd = new SqlCommand(select, Con);
-            SqlDataReader reader = cmd.ExecuteReader();
-            if (reader.Read())
+            using (SqlConnection connection = new SqlConnection(Clsdatabase.connectionString))
             {
-                reader.Read();
-                MessageBox.Show("Đăng nhập vào hệ thống (Quyền Admin) !", "Thông báo !");
-                FrmMain.quyen = "Admin";
-                this.Hide();
-                this.Close();
-            }
-            else 
-            {
-                MessageBox.Show("Đăng nhập vào hệ thống (Quyền user) !", "Thông báo !");
-                FrmMain.quyen = "user";
-                this.Hide();
-                this.Close();
-            }
-            FrmMain frm = new FrmMain();
-                //frm.Show();
-                frm.ShowDialog();
-                cmd.Dispose();
-                reader.Close();
-                reader.Dispose();
-           
+                connection.Open();
+                using(SqlCommand command = new SqlCommand("sp_dangnhap", connection))
+                {
+                    command.CommandType = CommandType.StoredProcedure;
+                    command.Parameters.AddWithValue("sTendangnhap", textBox1.Text);
+                    command.Parameters.AddWithValue("sMatkhau", textBox2.Text);
+
+                    SqlDataReader reader = command.ExecuteReader();
+                    if (reader.Read())
+                    {
+                        MessageBox.Show("Đăng nhập vào hệ thống ", "Thông báo !");
+                        FrmMain.quyen = (string)reader["sTenquyen"];
+                        this.Hide();
+                        this.Close();
+                        FrmMain frm = new FrmMain();
+                        //frm.Show();
+                        frm.ShowDialog();
+                    }
+                    else
+                    {
+                        MessageBox.Show("Tài khoản hoặc mật khẩu không chính xácc", "Thông báo !");
+                    }
+                }    
+            }    
+            
+            
             
             }
 

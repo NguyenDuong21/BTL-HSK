@@ -57,7 +57,7 @@ namespace QLNS
                 menuItem14.Enabled = true;
                 menuItem5.Enabled = true;
             }
-            else if(quyen=="user")
+            else if(quyen=="User")
             {
                /* menuItem2.Enabled = true;
                 menuItem3.Enabled = true;*/

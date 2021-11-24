@@ -13,7 +13,7 @@ namespace QLNS
     class Clsdatabase
     {
         string strconnect = "Data Source=DESKTOP-LNGJ4BJ;Initial Catalog=QLNS;Integrated Security=True";
-        static string connectionString = ConfigurationManager.ConnectionStrings["conn"].ConnectionString;
+        public static string connectionString = ConfigurationManager.ConnectionStrings["conn"].ConnectionString;
         SqlConnection sqlcon;
         SqlCommand sqlcom;
         SqlDataAdapter sqlda;

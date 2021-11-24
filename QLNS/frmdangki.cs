@@ -181,25 +181,29 @@ namespace QLNS
             textBox2.Enabled = false;
             DataView data = (DataView)dataGridView1.DataSource;
             DataRowView row = data[dataGridView1.CurrentRow.Index];
-            button6.Tag = row["PK_TaikhoanID"];
-            textBox1.Text = (string)row["sTendangnhap"];
-            textBox2.Text = (string)row["sMatkhau"];
-            foreach (DataRowView rowcb in comboBox1.Items)
+            if(row["PK_TaikhoanID"] != System.DBNull.Value)
             {
-                if (rowcb["PK_NhanvienID"].ToString() == row["FK_NhanvienID"].ToString())
+                button6.Tag = row["PK_TaikhoanID"];
+                textBox1.Text = (string)row["sTendangnhap"];
+                textBox2.Text = (string)row["sMatkhau"];
+                foreach (DataRowView rowcb in comboBox1.Items)
                 {
-                    comboBox1.SelectedItem = rowcb;
-                    break;
+                    if (rowcb["PK_NhanvienID"].ToString() == row["FK_NhanvienID"].ToString())
+                    {
+                        comboBox1.SelectedItem = rowcb;
+                        break;
+                    }
                 }
-            }
-            foreach (DataRowView rowView in comboBox2.Items)
-            {
-                if (rowView["PK_QuyenID"].ToString() == row["FK_QuyenID"].ToString())
+                foreach (DataRowView rowView in comboBox2.Items)
                 {
-                    comboBox2.SelectedItem = rowView;
-                    break;
+                    if (rowView["PK_QuyenID"].ToString() == row["FK_QuyenID"].ToString())
+                    {
+                        comboBox2.SelectedItem = rowView;
+                        break;
+                    }
                 }
-            }
+            }    
+            
         }
 
         private void button6_Click(object sender, EventArgs e)
