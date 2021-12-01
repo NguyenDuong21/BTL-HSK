@@ -40,7 +40,8 @@
             this.menuItem5 = new System.Windows.Forms.ToolStripMenuItem();
             this.menuItemdmk = new System.Windows.Forms.ToolStripMenuItem();
             this.menuItem14 = new System.Windows.Forms.ToolStripMenuItem();
-            this.menuItem15 = new System.Windows.Forms.ToolStripMenuItem();
+            this.phongban = new System.Windows.Forms.ToolStripMenuItem();
+            this.côngTrìnhToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.cmd_exit = new System.Windows.Forms.Button();
             this.btntracuu = new DevComponents.DotNetBar.BubbleButton();
             this.btndmk = new DevComponents.DotNetBar.BubbleButton();
@@ -98,7 +99,7 @@
             this.panel1.Location = new System.Drawing.Point(16, 15);
             this.panel1.Margin = new System.Windows.Forms.Padding(4);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(1248, 690);
+            this.panel1.Size = new System.Drawing.Size(1042, 540);
             this.panel1.TabIndex = 17;
             this.panel1.Paint += new System.Windows.Forms.PaintEventHandler(this.panel1_Paint);
             // 
@@ -106,7 +107,7 @@
             // 
             this.panel_show.BackColor = System.Drawing.SystemColors.ButtonHighlight;
             this.panel_show.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.panel_show.Location = new System.Drawing.Point(180, 207);
+            this.panel_show.Location = new System.Drawing.Point(4, 41);
             this.panel_show.Margin = new System.Windows.Forms.Padding(4);
             this.panel_show.Name = "panel_show";
             this.panel_show.Size = new System.Drawing.Size(1009, 473);
@@ -123,9 +124,9 @@
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.menuItem1,
             this.menuItem14});
-            this.menuStrip1.Location = new System.Drawing.Point(21, 137);
+            this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(452, 30);
+            this.menuStrip1.Size = new System.Drawing.Size(452, 37);
             this.menuStrip1.TabIndex = 16;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -138,14 +139,14 @@
             this.menuItem1.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.menuItem1.ForeColor = System.Drawing.SystemColors.ControlText;
             this.menuItem1.Name = "menuItem1";
-            this.menuItem1.Size = new System.Drawing.Size(102, 26);
+            this.menuItem1.Size = new System.Drawing.Size(102, 33);
             this.menuItem1.Text = "&Tài khoản";
             this.menuItem1.Click += new System.EventHandler(this.menuItem1_Click);
             // 
             // menuItem4
             // 
             this.menuItem4.Name = "menuItem4";
-            this.menuItem4.Size = new System.Drawing.Size(224, 26);
+            this.menuItem4.Size = new System.Drawing.Size(203, 26);
             this.menuItem4.Text = "Đăng Nhập";
             this.menuItem4.Click += new System.EventHandler(this.menuItem4_Click);
             // 
@@ -153,33 +154,40 @@
             // 
             this.menuItem5.Enabled = false;
             this.menuItem5.Name = "menuItem5";
-            this.menuItem5.Size = new System.Drawing.Size(224, 26);
+            this.menuItem5.Size = new System.Drawing.Size(203, 26);
             this.menuItem5.Text = "QLy tài khoản";
             this.menuItem5.Click += new System.EventHandler(this.menuItem5_Click);
             // 
             // menuItemdmk
             // 
             this.menuItemdmk.Name = "menuItemdmk";
-            this.menuItemdmk.Size = new System.Drawing.Size(224, 26);
+            this.menuItemdmk.Size = new System.Drawing.Size(203, 26);
             this.menuItemdmk.Text = "Đổi mật khẩu";
             this.menuItemdmk.Click += new System.EventHandler(this.menuItemdmk_Click_1);
             // 
             // menuItem14
             // 
             this.menuItem14.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.menuItem15});
-            this.menuItem14.Enabled = false;
+            this.phongban,
+            this.côngTrìnhToolStripMenuItem});
             this.menuItem14.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.menuItem14.Name = "menuItem14";
-            this.menuItem14.Size = new System.Drawing.Size(91, 26);
-            this.menuItem14.Text = "&Quản Lý";
+            this.menuItem14.Size = new System.Drawing.Size(86, 33);
+            this.menuItem14.Text = "&Quản lý";
             // 
-            // menuItem15
+            // phongban
             // 
-            this.menuItem15.Name = "menuItem15";
-            this.menuItem15.Size = new System.Drawing.Size(175, 26);
-            this.menuItem15.Text = "&Phòng ban";
-            this.menuItem15.Click += new System.EventHandler(this.menuItem15_Click);
+            this.phongban.Name = "phongban";
+            this.phongban.Size = new System.Drawing.Size(224, 26);
+            this.phongban.Text = "Nhân viên";
+            this.phongban.Click += new System.EventHandler(this.phongban_Click);
+            // 
+            // côngTrìnhToolStripMenuItem
+            // 
+            this.côngTrìnhToolStripMenuItem.Name = "côngTrìnhToolStripMenuItem";
+            this.côngTrìnhToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
+            this.côngTrìnhToolStripMenuItem.Text = "Công trình";
+            this.côngTrìnhToolStripMenuItem.Click += new System.EventHandler(this.côngTrìnhToolStripMenuItem_Click);
             // 
             // cmd_exit
             // 
@@ -192,7 +200,7 @@
             this.cmd_exit.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.cmd_exit.Font = new System.Drawing.Font("Times New Roman", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cmd_exit.ImageAlign = System.Drawing.ContentAlignment.BottomLeft;
-            this.cmd_exit.Location = new System.Drawing.Point(1213, 635);
+            this.cmd_exit.Location = new System.Drawing.Point(1094, 527);
             this.cmd_exit.Margin = new System.Windows.Forms.Padding(4);
             this.cmd_exit.Name = "cmd_exit";
             this.cmd_exit.Size = new System.Drawing.Size(100, 28);
@@ -295,10 +303,10 @@
         private System.Windows.Forms.ToolStripMenuItem menuItem5;
         private System.Windows.Forms.ToolStripMenuItem menuItemdmk;
         public System.Windows.Forms.ToolStripMenuItem menuItem14;
-        private System.Windows.Forms.ToolStripMenuItem menuItem15;
         private System.Windows.Forms.Button cmd_exit;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Panel panel_show;
-
+        private System.Windows.Forms.ToolStripMenuItem phongban;
+        private System.Windows.Forms.ToolStripMenuItem côngTrìnhToolStripMenuItem;
     }
 }

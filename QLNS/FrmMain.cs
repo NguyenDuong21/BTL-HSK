@@ -383,16 +383,7 @@ namespace QLNS
             fpb.Show();
         }
 
-        private void menuItem20_Click_1(object sender, EventArgs e)
-        {
-            Form1 a = new Form1();
-            panel_show.Show();
-            panel_show.Controls.Clear();
-            a.TopLevel = false;
-            a.Dock = DockStyle.Fill;
-            panel_show.Controls.Add(a);
-            a.Show();
-        }
+       
 
         private void menuItem5_Click(object sender, EventArgs e)
         {
@@ -405,7 +396,16 @@ namespace QLNS
             b.Show();
         }
 
+        private void phongban_Click(object sender, EventArgs e)
+        {
+            FormNhanVien formNhanVien = new FormNhanVien();
+            formNhanVien.Show();
+        }
 
-
+        private void côngTrìnhToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            FormCongTrinh frmCongTrinh = new FormCongTrinh();
+            frmCongTrinh.Show();
+        }
     }
 }
